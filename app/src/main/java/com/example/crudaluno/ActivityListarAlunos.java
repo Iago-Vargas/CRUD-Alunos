@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -21,7 +20,7 @@ import java.util.List;
 public class ActivityListarAlunos extends AppCompatActivity {
 
     private ListView listView;
-    private AlunoDAO dao;
+    private AlunoRepository repository;
     private final List<Aluno> alunos = new ArrayList<>();
     private final List<Aluno> alunosFiltrados = new ArrayList<>();
 
@@ -32,7 +31,7 @@ public class ActivityListarAlunos extends AppCompatActivity {
         setContentView(R.layout.activity_listar_alunos);
 
         listView = findViewById(R.id.lista_alunos);
-        dao = new AlunoDAO(this);
+        repository = new AlunoRepository(this);
 
         registerForContextMenu(listView);
 
@@ -97,10 +96,10 @@ public class ActivityListarAlunos extends AppCompatActivity {
                 .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
-                        dao.excluir(alunoExcluir);
+                        repository.excluir(alunoExcluir);
                         alunos.remove(alunoExcluir);
                         alunosFiltrados.remove(alunoExcluir);
-                        ((ArrayAdapter<?>) listView.getAdapter()).notifyDataSetChanged();
+                        ((AlunoAdapter) listView.getAdapter()).notifyDataSetChanged();
                     }
                 })
                 .create();
@@ -109,16 +108,12 @@ public class ActivityListarAlunos extends AppCompatActivity {
 
     private void recarregarLista() {
         alunos.clear();
-        alunos.addAll(dao.obterTodos());
+        alunos.addAll(repository.obterTodos());
 
         alunosFiltrados.clear();
         alunosFiltrados.addAll(alunos);
 
-        ArrayAdapter<Aluno> adaptador = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                alunosFiltrados
-        );
+        AlunoAdapter adaptador = new AlunoAdapter(this, alunosFiltrados);
         listView.setAdapter(adaptador);
     }
 }

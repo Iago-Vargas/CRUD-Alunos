@@ -1,14 +1,21 @@
 package com.example.crudaluno;
 
+import androidx.room.Entity;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+@Entity(tableName = "aluno", indices = {@Index(value = "cpf", unique = true)})
 public class Aluno implements Serializable {
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
     private String nome;
     private String cpf;
     private String telefone;
     private String endereco;
     private String curso;
+    private byte[] foto;
 
     public Integer getId() {
         return id;
@@ -58,9 +65,16 @@ public class Aluno implements Serializable {
         this.curso = curso;
     }
 
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
     @Override
     public String toString(){
         return nome;
     }
-
 }
