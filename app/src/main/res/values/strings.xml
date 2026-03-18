@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">CRUD-Aluno</string>
+    <string name="foto_aluno">Foto do aluno</string>
+    <string name="tirar_foto">Tirar Foto</string>
+    <string name="remover_foto">Remover Foto</string>
+    <string name="nome_label">Nome</string>
+    <string name="nome_hint">Digite o nome</string>
+    <string name="cpf_label">CPF</string>
+    <string name="cpf_hint">Digite o CPF</string>
+    <string name="telefone_label">Telefone</string>
+    <string name="telefone_hint">(XX) 9XXXX-XXXX</string>
+    <string name="endereco_label">Endereco</string>
+    <string name="endereco_hint">Digite o endereco</string>
+    <string name="curso_label">Curso</string>
+    <string name="curso_hint">Digite o curso</string>
+    <string name="salvar">Salvar</string>
+    <string name="visualizar_lista">Visualizar Lista</string>
+    <string name="voltar">Voltar</string>
 </resources>
